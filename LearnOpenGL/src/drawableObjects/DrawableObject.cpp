@@ -13,6 +13,9 @@ DrawableObject::DrawableObject(glm::vec3 possition, glm::vec3 velocity, float ma
 		//std::cout << "Im a drawable" << std::endl;
 	}
 
+	/*
+	Apply gravitational forces to the object
+	*/
 	void DrawableObject::update(float time) {
 		time = time/5;
 		glm::vec3 newPosition = getPosition();
@@ -72,57 +75,57 @@ DrawableObject::DrawableObject(glm::vec3 possition, glm::vec3 velocity, float ma
 	Update only this object, no need for updating the other since that will be done
 	inside the call by that object.
 	*/
-	void DrawableObject::sphereColisionReflection(DrawableObject& obj) {
-		glm::vec3 pos = getPosition();
-		glm::vec3 objPos = obj.getPosition();
+	//void DrawableObject::sphereColisionReflection(DrawableObject& obj) {
+	//	glm::vec3 pos = getPosition();
+	//	glm::vec3 objPos = obj.getPosition();
 
-		//distance of objects is smaller than the sum of the radius
-		if (sphereCollision(obj)) {			
-			glm::vec3 collisionPoint = pos - 0.5f * (pos - objPos);
+	//	//distance of objects is smaller than the sum of the radius
+	//	if (sphereCollision(obj)) {			
+	//		glm::vec3 collisionPoint = pos - 0.5f * (pos - objPos);
 
-			//std::cout << "collisionPoint = " << collisionPoint.x << " " << collisionPoint.y << " " << 
-			//	collisionPoint.z << " " << std::endl;
-			//N = normalize(C - O)
-			glm::vec3 normal = glm::normalize(pos - objPos);
-			glm::vec3 normal2 = pos - objPos; //tobe deleted
+	//		//std::cout << "collisionPoint = " << collisionPoint.x << " " << collisionPoint.y << " " << 
+	//		//	collisionPoint.z << " " << std::endl;
+	//		//N = normalize(C - O)
+	//		glm::vec3 normal = glm::normalize(pos - objPos);
+	//		glm::vec3 normal2 = pos - objPos; //tobe deleted
 
-			glm::vec3 normVel = normalize(velocity);
-			//R = V - 2(dot(V, N))N
+	//		glm::vec3 normVel = normalize(velocity);
+	//		//R = V - 2(dot(V, N))N
 
-			glm::vec3 reflection = normVel - 2.0f * (glm::dot(normalize(normVel), normal)) *normal;
-			reflection = length(velocity) * reflection;
+	//		glm::vec3 reflection = normVel - 2.0f * (glm::dot(normalize(normVel), normal)) *normal;
+	//		reflection = length(velocity) * reflection;
 
-			setVelocity(0.99f * reflection);
+	//		setVelocity(0.99f * reflection);
 
-			//std::cout << "reflection: " << reflection.x << " " << reflection.y << " " << reflection.z << " " << std::endl;
-			//std::cout << "normal: " << normal2.x << " " << normal2.y << " " << normal2.z << " " << std::endl;
-		}
-	}
+	//		//std::cout << "reflection: " << reflection.x << " " << reflection.y << " " << reflection.z << " " << std::endl;
+	//		//std::cout << "normal: " << normal2.x << " " << normal2.y << " " << normal2.z << " " << std::endl;
+	//	}
+	//}
 
-	bool DrawableObject::sphereCollision(DrawableObject& obj) {
+	//bool DrawableObject::sphereCollision(DrawableObject& obj) {
 
-		glm::vec3 pos = getPosition();
-		glm::vec3 objPos = obj.getPosition();
+	//	glm::vec3 pos = getPosition();
+	//	glm::vec3 objPos = obj.getPosition();
 
-		float distance = sqrt(pow((pos.x - objPos.x), 2) + pow((pos.y - objPos.y), 2) + pow((pos.z - objPos.z), 2));
-		double sumRadius = radius + obj.getRadius();
+	//	float distance = sqrt(pow((pos.x - objPos.x), 2) + pow((pos.y - objPos.y), 2) + pow((pos.z - objPos.z), 2));
+	//	double sumRadius = radius + obj.getRadius();
 
-		return distance <= sumRadius;
-	}
+	//	return distance <= sumRadius;
+	//}
 
-	void DrawableObject::BoxCollisionReflection(DrawableObject& obj) {
-		
-	}
+	//void DrawableObject::BoxCollisionReflection(DrawableObject& obj) {
+	//		
+	//}
 
-	bool DrawableObject::boxCollision(DrawableObject& box) {
+	//bool DrawableObject::boxCollision(DrawableObject& box) {
 
-		glm::vec3 pos = getPosition();
-		glm::vec3 boxPos = box.getPosition();
-		float boxEdgeLength = box.getRadius()/2;
+	//	glm::vec3 pos = getPosition();
+	//	glm::vec3 boxPos = box.getPosition();
+	//	float boxEdgeLength = box.getRadius()/2;
 
-		return false;
+	//	return false;
 
 
-	}
+	//}
 	//DrawableObject* getCollisionObject(DrawableObject* objects, int arraySize) const;
 

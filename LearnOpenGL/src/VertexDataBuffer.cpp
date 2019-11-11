@@ -1,9 +1,9 @@
 #pragma once
+#include <GL/glew.h>
+#include <iostream>
 
 #include "VertexDataBuffer.h"
 #include "glm/glm/glm.hpp"
-#include <GL/glew.h>
-#include <iostream>
 
 VertexDataBuffer::VertexDataBuffer() : VAO(0), VBO(0), AMOUNT_VERTICIS(0) {};
 

@@ -1,31 +1,6 @@
-﻿  Application.cpp
-C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(228,56): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(228,56): warning C4244:         with
-C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(228,56): warning C4244:         [
-C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(228,56): warning C4244:             T=float
-C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(228,56): warning C4244:         ]
-C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(264,33): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(264,24): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(266,51): warning C4305: 'initializing': truncation from 'double' to 'float'
-  Camera.cpp
-  DrawableObject.cpp
-C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(287,57): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Dev\LearnOpenGL\LearnOpenGL\src\drawableObjects\DrawableObject.cpp(25,28): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\Dev\LearnOpenGL\LearnOpenGL\src\drawableObjects\DrawableObject.cpp(25,21): warning C4244: 'initializing': conversion from 'double' to 'const float', possible loss of data
-C:\Dev\LearnOpenGL\LearnOpenGL\src\drawableObjects\DrawableObject.cpp(37,34): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
-C:\Dev\LearnOpenGL\LearnOpenGL\src\drawableObjects\DrawableObject.cpp(37,34): warning C4244:         with
-C:\Dev\LearnOpenGL\LearnOpenGL\src\drawableObjects\DrawableObject.cpp(37,34): warning C4244:         [
-C:\Dev\LearnOpenGL\LearnOpenGL\src\drawableObjects\DrawableObject.cpp(37,34): warning C4244:             T=float
-C:\Dev\LearnOpenGL\LearnOpenGL\src\drawableObjects\DrawableObject.cpp(37,34): warning C4244:         ]
-  RotatableDrawableObject.cpp
-  Sphere.cpp
-  GenerateSpheres.cpp
-C:\Dev\LearnOpenGL\LearnOpenGL\src\drawableObjects\DrawableObject.cpp(121,23): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  ImageLoader.cpp
-  OLDapplication.cpp
-  Shader.cpp
-  VertexDataBuffer.cpp
-  Generating Code...
-C:\Dev\LearnOpenGL\LearnOpenGL\src\GenerateSpheres.cpp(15,20): warning C4244: 'return': conversion from 'int' to 'float', possible loss of data
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+﻿  VertexDataFactory.cpp
+C:\Dev\LearnOpenGL\LearnOpenGL\src\VertexDataFactory.cpp(89,57): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Dev\LearnOpenGL\LearnOpenGL\src\VertexDataFactory.cpp(83): warning C4715: 'VertexDataFactory::createVertexData': not all control paths return a value
+C:\Dev\LearnOpenGL\LearnOpenGL\src\VertexDataFactory.cpp(23): warning C4172: returning address of local variable or temporary
+C:\Dev\LearnOpenGL\LearnOpenGL\src\VertexDataFactory.cpp(78): warning C4172: returning address of local variable or temporary
   LearnOpenGL.vcxproj -> C:\Dev\LearnOpenGL\Debug\LearnOpenGL.exe

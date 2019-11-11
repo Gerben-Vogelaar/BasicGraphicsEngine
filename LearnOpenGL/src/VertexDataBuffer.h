@@ -1,3 +1,4 @@
+#pragma once
 
 class VertexDataBuffer {
 public:
@@ -12,8 +13,5 @@ public:
 	void drawBuffer();
 
 	//changeVertexBuffer();
-
-private:
-	
 };
 

@@ -17,7 +17,7 @@ float randomRadius() {
 
 GenerateSpheres::GenerateSpheres() {};
 
-DrawableObject* GenerateSpheres::createSpheres(DrawableObject* array, const int nrSpheres, VertexDataBuffer sphereData) {
+Sphere* GenerateSpheres::createSpheres(Sphere* array, const int nrSpheres, VertexDataBuffer sphereData) {
 
 	for (int i = 0; i < nrSpheres; i++) {
 
@@ -27,8 +27,7 @@ DrawableObject* GenerateSpheres::createSpheres(DrawableObject* array, const int 
 		glm::vec3 randPos = randomPostion();
 		float radius = randomRadius();
 
-		array[i] = DrawableObject(randPos,glm::vec3(0.0f), 4.0f, sphereData);
-		array[i].setRadius(1.0f);
+		array[i] = Sphere(randPos, glm::vec3(0.0f), 1.0f, sphereData, 2.0f);
 
 		while (loop) {
 
@@ -42,7 +41,6 @@ DrawableObject* GenerateSpheres::createSpheres(DrawableObject* array, const int 
 						radius = randomRadius();
 
 						array[i].setPosition(randPos);
-						//array[i].setRadius(radius);
 
 						loop = true;
 						continue;

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "drawableObjects/DrawableObject.h"
+#include "drawableObjects/Sphere.h"
 
 
 class GenerateSpheres {
 
 public:  
 	GenerateSpheres();
-	DrawableObject* createSpheres(DrawableObject* array, int nrSpheres, VertexDataBuffer sphereData);
+	Sphere* createSpheres(Sphere* array, int nrSpheres, VertexDataBuffer sphereData);
 };

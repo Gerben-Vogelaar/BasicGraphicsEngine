@@ -5,12 +5,12 @@
     <ClCompile Include="src\ImageLoader.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\Camera.cpp" />
-    <ClCompile Include="src\OLDapplication.cpp" />
     <ClCompile Include="src\VertexDataBuffer.cpp" />
     <ClCompile Include="src\drawableObjects\DrawableObject.cpp" />
-    <ClCompile Include="src\drawableObjects\RotatableDrawableObject.cpp" />
     <ClCompile Include="src\GenerateSpheres.cpp" />
     <ClCompile Include="src\drawableObjects\Sphere.cpp" />
+    <ClCompile Include="src\VertexDataFactory.cpp" />
+    <ClCompile Include="src\drawableObjects\Cube.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\glErrorHandling.h" />
@@ -19,9 +19,10 @@
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\drawableObjects\DrawableObject.h" />
     <ClInclude Include="src\VertexDataBuffer.h" />
-    <ClInclude Include="src\drawableObjects\RotatableDrawableObject.h" />
     <ClInclude Include="src\GenerateSpheres.h" />
     <ClInclude Include="src\drawableObjects\Sphere.h" />
+    <ClInclude Include="src\VertexDataFactory.h" />
+    <ClInclude Include="src\drawableObjects\Cube.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\shader.vs" />
