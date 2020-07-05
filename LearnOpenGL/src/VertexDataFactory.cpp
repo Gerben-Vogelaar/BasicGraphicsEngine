@@ -20,7 +20,7 @@ VertexDataBuffer* VertexDataFactory::createVertexData(DrawableType type)
 
 			createSphereVertices(detail, points);
 
-			return &VertexDataBuffer(points, sizeof(points), settings, 1, (detail + 1) * detail * 18);
+			return new VertexDataBuffer(points, sizeof(points), settings, 1, (detail + 1) * detail * 18);
 
 			break;
 		}
@@ -75,18 +75,21 @@ VertexDataBuffer* VertexDataFactory::createVertexData(DrawableType type)
 
 			int settings[1] = { 3 };
 
-			return &VertexDataBuffer(vertices, sizeof(float) * 108, settings, 1, 108);
+			return new VertexDataBuffer(vertices, sizeof(float) * 108, settings, 1, 108);
 
 			break;
 		}
 	}
+
+	//TODO: add debug information -> something went wrong creating a vertexdatabuffer
+	return NULL;
 }
 
 void createSphereVertices(int detail, float* points) {
 
 	//TODO: for a odd detail value, wierd things happen
 
-	const float pi = 3.141592653589793238462643383279502884;
+	const float pi = 3.141592653589793238462643383279502884f;
 
 	int count = 0;
 	int i = 0;

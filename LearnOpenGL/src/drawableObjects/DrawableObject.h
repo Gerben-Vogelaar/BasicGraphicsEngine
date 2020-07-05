@@ -45,10 +45,13 @@ class Sphere;
 class DrawableObject {
 private:
 	VertexDataBuffer buffer;
-		
+
 	glm::vec3 position;
 	glm::vec3 velocity;
 	float mass;
+
+	glm::vec3 accumulativeVelocity = glm::vec3(0.0f);
+	int amountCollisions = 1;
 
 public:
 	DrawableObject();
@@ -80,8 +83,12 @@ public:
 	glm::vec3 getPosition();
 	void setPosition(glm::vec3 newPosition);
 	
-	void setVertexDataBuffer(VertexDataBuffer& newBuffer);
+	int getAmountCollisions();
+	void resetAccumulativeVelocity();
+	void addNewReflectionVector(glm::vec3 newReflection);
+	glm::vec3 getAccumulatedVelocity();
 
+	void setVertexDataBuffer(VertexDataBuffer& newBuffer);
 
 //DrawableObject* getCollisionObject(DrawableObject* objects, int arraySize) const;
 }; 

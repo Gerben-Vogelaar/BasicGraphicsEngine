@@ -3,7 +3,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 
-#include <GL/glew.h>
+#include <glew.h>
 #include <iostream>
 #include"stb_image.h"
 

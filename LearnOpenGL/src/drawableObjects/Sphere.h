@@ -1,6 +1,5 @@
 #include "DrawableObject.h"
 
-
 class Sphere : public DrawableObject {
 
 private:
@@ -14,6 +13,8 @@ public:
 
 	virtual void sphereColisionReflection(Sphere& obj);
 	virtual bool sphereCollision(Sphere& obj);
+	virtual void collisionCorrection(Sphere& obj);
+
 
 	void setRadius(double radius);
 	double getRadius();

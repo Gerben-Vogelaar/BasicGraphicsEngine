@@ -1,6 +1,6 @@
 #pragma once
 #define STB_IMAGE_IMPLEMENTATION
-#include <GL/glew.h>
+#include <glew.h>
 #include <GLFW/glfw3.h>
 #include <string>
 #include <iostream>
@@ -29,7 +29,7 @@ float lastFrame = 0.0f;
 const int screenWidth = 800;
 const int screenHeight = 600;
 
-Camera ourCamera = Camera();
+Camera camera = Camera();
 
 int main(int argc, char* argv[]) {
 
@@ -39,12 +39,12 @@ int main(int argc, char* argv[]) {
 		std::cout << "glfwInit() failed" << std::endl;
 		return -1;
 	}
-	
+
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_OPENGL_CORE_PROFILE);
-	   
+
 	GLFWwindow* window;
 	window = glfwCreateWindow(screenWidth, screenHeight, "Learn openGL", NULL, NULL);
 
@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
 	//make the window the gl context
 	glfwMakeContextCurrent(window);
 	glViewport(0, 0, 800, 600);
-		
+
 	if (glewInit() != GLEW_OK) {
 		std::cout << "ERROR: glewInit() failed" << std::endl;
 		return -1;
@@ -70,17 +70,19 @@ int main(int argc, char* argv[]) {
 	glfwSetScrollCallback(window, scroll_callback);
 
 	//loading shaders
-	Shader ourShader("src\\shaders\\sphere.vs","src\\shaders\\sphere.fs");
-	
+	Shader ourShader("src\\shaders\\sphere.vs", "src\\shaders\\sphere.fs");
+
 	VertexDataFactory facto = VertexDataFactory();
 
 	VertexDataBuffer* vertexDataBuffer = facto.createVertexData(DrawableType::SPHERE);
 
-	const int totalSpheres= 10;
+	const int totalSpheres = 2;
 	GenerateSpheres sphereGen;
 
-	Sphere obj[totalSpheres]; 
-	sphereGen.createSpheres(obj, totalSpheres, *vertexDataBuffer);
+	Sphere obj[totalSpheres];
+	//sphereGen.createSpheresRandomly(obj, totalSpheres, *vertexDataBuffer);
+	//sphereGen.createSpheresInGrid(obj, totalSpheres, *vertexDataBuffer);
+	sphereGen.createSpheresCollisionTestSimularMotion(obj, totalSpheres, *vertexDataBuffer);
 
 	ourShader.use();
 
@@ -94,13 +96,15 @@ int main(int argc, char* argv[]) {
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
+
 		float currentFrame = (float)glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
 
 		//std::cout << 1 / deltaTime << std::endl;
 
-		ourCamera.processInput(window, deltaTime);
+		camera.processInput(window, deltaTime);
+
 
 		glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -108,35 +112,39 @@ int main(int argc, char* argv[]) {
 		ourShader.use();
 
 		//glBindVertexArray(sphere.getVAO());
-		
-		//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-		//update the sphere positions
-		for (int i = 0; i < totalSpheres; i++) {
-			obj[i].update(deltaTime);
-		}
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-		/* detect sphere collision
-		
-		Current solution is n^2.
-		This is too slow, should later on be updated to atleast
-		linear solution.
-		*/
-		for (int i = 0; i < totalSpheres; i++) {
-			for (int j = 0; j < totalSpheres; j++) {
-				if (i == j) {
-					continue;
-				}
-				else {
-					obj[i].sphereColisionReflection(obj[j]);
+		//pause updating of object to verify the different states of spheres
+		if (!camera.getPause()) {
+
+			//update the sphere positions
+			for (int i = 0; i < totalSpheres; i++) {
+				obj[i].update(deltaTime);
+			}
+
+			/* detect sphere collision
+
+			Current solution is n^2.
+			This is too slow, should later on be updated to atleast
+			linear solution.
+			*/
+			for (int i = 0; i < totalSpheres; i++) {
+				for (int j = 0; j < totalSpheres; j++) {
+					if (i == j) {
+						continue;
+					}
+					else {
+						obj[i].sphereColisionReflection(obj[j]);
+					}
 				}
 			}
 		}
 
-		glm::mat4 projection = glm::perspective(glm::radians(ourCamera.fov), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
+		glm::mat4 projection = glm::perspective(glm::radians(camera.fov), (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
 		ourShader.setMat4("projection", projection);
 
-		glm::mat4 view = glm::lookAt(ourCamera.cameraPos, ourCamera.cameraPos + ourCamera.cameraFront, ourCamera.cameraUp);
+		glm::mat4 view = glm::lookAt(camera.cameraPos, camera.cameraPos + camera.cameraFront, camera.cameraUp);
 		ourShader.setMat4("view", view);
 
 		ourShader.setVec3("lightColor", glm::vec3(0.0f, 1.0f, 0.0f));
@@ -154,7 +162,8 @@ int main(int argc, char* argv[]) {
 		model = glm::mat4(1.0f);
 		ourShader.setMat4("model", model);
 		cube.draw();
-			   		
+
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
@@ -165,10 +174,10 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-void mouse_callback(GLFWwindow *window, double xpos, double ypos) {
-	ourCamera.camera_mouse_callback(window, (float)xpos, (float)ypos);
+void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
+	camera.camera_mouse_callback(window, (float)xpos, (float)ypos);
 }
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
-	void camera_scroll_callback(GLFWwindow* window, float xoffset, float yoffset);
+	void camera_scroll_callback(GLFWwindow * window, float xoffset, float yoffset);
 }

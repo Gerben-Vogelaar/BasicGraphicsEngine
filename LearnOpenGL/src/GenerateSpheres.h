@@ -7,5 +7,7 @@ class GenerateSpheres {
 
 public:  
 	GenerateSpheres();
-	Sphere* createSpheres(Sphere* array, int nrSpheres, VertexDataBuffer sphereData);
+	Sphere* createSpheresRandomly(Sphere* array, int nrSpheres, VertexDataBuffer sphereData);
+	Sphere* createSpheresInGrid(Sphere* array, int nrSpheres, VertexDataBuffer sphereData);
+	Sphere* createSpheresCollisionTestSimularMotion(Sphere* array, int nrSpheres, VertexDataBuffer sphereData);
 };

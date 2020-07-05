@@ -1,6 +1,9 @@
-﻿  VertexDataFactory.cpp
-C:\Dev\LearnOpenGL\LearnOpenGL\src\VertexDataFactory.cpp(89,57): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Dev\LearnOpenGL\LearnOpenGL\src\VertexDataFactory.cpp(83): warning C4715: 'VertexDataFactory::createVertexData': not all control paths return a value
-C:\Dev\LearnOpenGL\LearnOpenGL\src\VertexDataFactory.cpp(23): warning C4172: returning address of local variable or temporary
-C:\Dev\LearnOpenGL\LearnOpenGL\src\VertexDataFactory.cpp(78): warning C4172: returning address of local variable or temporary
+﻿  Application.cpp
+  Camera.cpp
+  Generating Code...
+C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(156,56): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(156,56): warning C4244:         with
+C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(156,56): warning C4244:         [
+C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(156,56): warning C4244:             T=float
+C:\Dev\LearnOpenGL\LearnOpenGL\src\Application.cpp(156,56): warning C4244:         ]
   LearnOpenGL.vcxproj -> C:\Dev\LearnOpenGL\Debug\LearnOpenGL.exe

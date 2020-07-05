@@ -44,17 +44,24 @@ void Camera::camera_scroll_callback(GLFWwindow* window, float xoffset, float yof
 		fov = 45.0f;
 }
 
-void Camera::processInput(GLFWwindow *window, const float deltaTime) {
-	
-	float cameraSpeedMult = 1.5f; //previously 2.5f
+void Camera::processInput(GLFWwindow* window, const float deltaTime) {
+
+	float cameraSpeedMult = 0.1f; //previously 2.5f
 
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) glfwSetWindowShouldClose(window, true);
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) cameraPos += cameraSpeedMult * cameraFront;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) cameraPos -= cameraSpeedMult * cameraFront;
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeedMult;
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeedMult;
-
 	//set camera movement speed -- notworking since var is local not global
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) cameraSpeedMult += .01f;
 	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) cameraSpeedMult -= .01f;
+
+	if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) pause = true;
+	if (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS) pause = false;
+
+}
+
+bool Camera::getPause() {
+	return pause;
 }

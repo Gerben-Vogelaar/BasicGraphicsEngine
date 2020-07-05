@@ -2,7 +2,7 @@
 #include "drawableObjects/DrawableObject.h"
 
 #include <iostream>
-DrawableObject::DrawableObject() : position(glm::vec3(0.0f)), velocity(glm::vec3(0.0f)), mass(0.0f), buffer(VertexDataBuffer()) {};
+DrawableObject::DrawableObject() : position(glm::vec3(0.0f)), velocity(glm::vec3(0.0f)), mass(0.0f), buffer(VertexDataBuffer()){};
 
 DrawableObject::DrawableObject(glm::vec3 possition, glm::vec3 velocity, float mass, VertexDataBuffer& bdb) :
 	position(possition), velocity(velocity), mass(mass), buffer(bdb){};
@@ -20,6 +20,14 @@ DrawableObject::DrawableObject(glm::vec3 possition, glm::vec3 velocity, float ma
 		time = time/5;
 		glm::vec3 newPosition = getPosition();
 		glm::vec3 newVelocity = getVelocity();
+
+		if (amountCollisions > 0) {
+			std::cout << newVelocity.x << "," << newVelocity.y << "," << newVelocity.z << std::endl;
+			std::cout << getAccumulatedVelocity().x << "," << getAccumulatedVelocity().y << "," <<  getAccumulatedVelocity().z << std::endl;
+			newVelocity = getAccumulatedVelocity() * float((1.0f / getAmountCollisions()));
+		}
+
+		//newVelocity += getAccumulatedVelocity();
 
 		//std::cout << "POS: " << newPosition.x << " " << newPosition.y << " " << newPosition.z << " " << std::endl;
 		//std::cout << "VEL: " << newVelocity.x << " " << newVelocity.y << " " << newVelocity.z << " " << std::endl;
@@ -43,8 +51,11 @@ DrawableObject::DrawableObject(glm::vec3 possition, glm::vec3 velocity, float ma
 		newVelocity.x = newVelocity.x * .99f;
 		newVelocity.z = newVelocity.z * .99f;
 
+
+
 		setPosition(newPosition);		
 		setVelocity(newVelocity);
+		resetAccumulativeVelocity();
 	};
 
 	void DrawableObject::draw() {
@@ -69,6 +80,26 @@ DrawableObject::DrawableObject(glm::vec3 possition, glm::vec3 velocity, float ma
 
 	void DrawableObject::setVertexDataBuffer(VertexDataBuffer& newBuffer) {
 		buffer = newBuffer;
+	}
+
+	int DrawableObject::getAmountCollisions() {
+		return amountCollisions;
+	}
+
+	void DrawableObject::resetAccumulativeVelocity() {
+		amountCollisions = 0;
+		accumulativeVelocity = glm::vec3(0.0f);
+
+	}
+
+	void DrawableObject::addNewReflectionVector(glm::vec3 newReflection) {
+		amountCollisions++;
+		accumulativeVelocity += newReflection;
+	}
+
+	glm::vec3 DrawableObject::getAccumulatedVelocity()
+	{
+		return accumulativeVelocity;
 	}
 
 	/*

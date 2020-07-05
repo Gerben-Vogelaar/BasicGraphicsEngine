@@ -8,6 +8,9 @@ public:
 	glm::vec3 cameraPos = glm::vec3(0.0f, 5.0f, 15.0f);
 	glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -10.0f);
 	glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+	bool pause = true;
+	bool pausePressed = false;
+
 
 	bool firstMouse = true;
 	float yaw = -90.0f;	// yaw is initialized to -90.0 degrees since a yaw of 0.0 results in a direction vector pointing to the right so we initially rotate a bit to the left.
@@ -19,4 +22,5 @@ public:
 	void processInput(GLFWwindow *window, const float deltaTime);
 	void camera_mouse_callback(GLFWwindow* window, float xpos, float ypos);
 	void camera_scroll_callback(GLFWwindow* window, float xoffset, float yoffset);
+	bool getPause();
 };
